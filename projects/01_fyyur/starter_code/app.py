@@ -295,19 +295,20 @@ def edit_artist(artist_id):
 def edit_artist_submission(artist_id):
   # TODO: take values from the form submitted, and update existing
   # artist record with ID <artist_id> using the new attributes
+  artist = Artist.query.get(artist_id)
   error = False
+  form = ArtistForm(request.form, meta={"csrf": False})
   try:
-        artist = Artist.query.get(artist_id)
-        artist.name = request.form['name']
-        artist.city = request.form['city']
-        artist.state = request.form['state']
-        artist.phone = request.form['phone']
-        artist.genres = request.form['genres']
-        artist.website = request.form['website_link']
-        artist.image_link = request.form['image_link']
-        artist.facebook_link = request.form['facebook_link']
-        artist.seeking_venue = request.form['seeking_venue'],
-        artist.seeking_description = request.form['seeking_description']
+        artist.seeking_description = form.seeking_description.data
+        artist.seeking_venue = form.seeking_venue.data
+        artist.name = form.name.data
+        artist.city = form.city.data
+        artist.state = form.state.data
+        artist.facebook_link = form.facebook_link.data
+        artist.phone = form.phone.data
+        artist.genres = form.genres.data
+        artist.website = form.website_link.data
+        artist.image_link = form.image_link.data
         db.session.add(artist)
         db.session.commit()
   except:
@@ -335,19 +336,22 @@ def edit_venue_submission(venue_id):
   # TODO: take values from the form submitted, and update existing
   # venue record with ID <venue_id> using the new attributes
     venue = Venue.query.get(venue_id)
-
+    form = VenueForm(request.form, meta={'csrf': False})
     error = False
     try:
-        venue.name = request.form['name']
-        venue.city = request.form['city']
-        venue.state = request.form['state']
-        venue.address = request.form['address']
-        venue.phone = request.form['phone']
-        venue.genres = request.form['genres']
-        venue.facebook_link = request.form['facebook_link']
-        venue.seeking_talent = request.form['seeking_venue'],
-        db.session.add(venue)
-        db.session.commit()
+          venue.facebook_link = form.facebook_link.data,
+          venue.name = form.name.data,
+          venue.state = form.state.data,
+          venue.city = form.city.data,
+          venue.address = form.address.data,
+          venue.genres = form.genres.data,
+          venue.phone = form.phone.data,
+          venue.image_link = form.image_link.data,
+          venue.website = form.website_link.data,
+          venue.seeking_description = form.seeking_description.data,
+          venue.seeking_talent = form.seeking_talent.data
+          db.session.add(venue)
+          db.session.commit()
     except:
         error = True
         db.session.rollback()
