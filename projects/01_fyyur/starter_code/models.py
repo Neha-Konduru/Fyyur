@@ -24,9 +24,10 @@ class Venue(db.Model):
     website = db.Column(db.String(500))
     seeking_talent = db.Column(db.BOOLEAN)
     seeking_description = db.Column(db.String(900))
+    created_date =  db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
-      return f'<Venue: {self.id}, name: {self.name}, city: {self.city}, state: {self.state}, address: {self.address}, phone: {self.phone}, image_link: {self.image_link}, facebook_link: {self.facebook_link}, shows: {self.shows}, genres: {self.genres}, website: {self.website}, seeking_talent: {self.seeking_talent}, seeking_description: {self.seeking_description}>'
+      return f'<Venue: {self.id}, name: {self.name}, city: {self.city}, state: {self.state}, address: {self.address}, phone: {self.phone}, image_link: {self.image_link}, facebook_link: {self.facebook_link}, shows: {self.shows}, genres: {self.genres}, website: {self.website}, seeking_talent: {self.seeking_talent}, seeking_description: {self.seeking_description}, created_date: {self.created_date}>'
 
 class Artist(db.Model):
     __tablename__ = 'Artist'
@@ -43,9 +44,10 @@ class Artist(db.Model):
     website = db.Column(db.String(500))
     seeking_venue = db.Column(db.BOOLEAN)
     seeking_description = db.Column(db.String(900))
+    created_date =  db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
-      return f'<Artist: {self.id}, name: {self.name}, city: {self.city}, state: {self.state}, phone: {self.phone}, genres: {self.genres}, image_link: {self.image_link}, facebook_link: {self.facebook_link}, shows: {self.shows}, website: {self.website}, seeking_venue: {self.seeking_venue}, seeking_description: {self.seeking_description}>'
+      return f'<Artist: {self.id}, name: {self.name}, city: {self.city}, state: {self.state}, phone: {self.phone}, genres: {self.genres}, image_link: {self.image_link}, facebook_link: {self.facebook_link}, shows: {self.shows}, website: {self.website}, seeking_venue: {self.seeking_venue}, seeking_description: {self.seeking_description}, created_date: {self.created_date}>'
 
 class Show(db.Model):
   _tablename__ = 'Show'
